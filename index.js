@@ -1,7 +1,7 @@
 const tasks = require("./routes/tasks");
 const path=require('path');
 const connection = require("./db");
-const cors = require("cors");
+const {corsConfig}=require('./config/cors');
 const express = require("express");
 const app = express();
 require('dotenv').config();
@@ -9,8 +9,7 @@ require('dotenv').config();
 connection();
 
 app.use(express.json());
-app.use(cors());
-
+corsConfig();
 app.use("/api/tasks", tasks);
 
 if(process.env.NODE_ENV==='production'){
